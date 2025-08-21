@@ -14,34 +14,80 @@
   </ion-header>
 
   <div id="container">
-    <ion-card>
+    <!-- Task Achievement Table -->
+    <ion-card class="achievement-card">
       <ion-card-header>
-        <ion-card-title>ようこそ DailyGems へ</ion-card-title>
-        <ion-card-subtitle>日々の習慣化をサポートするアプリ</ion-card-subtitle>
+        <ion-card-title>タスク達成度表</ion-card-title>
+        <ion-card-subtitle>今週の進捗状況</ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
-        毎日の小さな習慣を積み重ねて、より良い自分を目指しましょう。
-        DailyGemsは、あなたの日々の成長をサポートします。
+        <!-- Weekly Calendar Grid -->
+        <ion-grid class="achievement-grid">
+          <!-- Header row with days -->
+          <ion-row class="header-row">
+            <ion-col size="3" class="task-column-header">タスク</ion-col>
+            <ion-col *ngFor="let day of weekDays" class="day-header">
+              <div class="day-name">{{ day.dayName }}</div>
+              <div class="day-date">{{ day.date.getDate() }}</div>
+            </ion-col>
+          </ion-row>
+          
+          <!-- Task rows -->
+          <ion-row *ngFor="let task of tasks" class="task-row">
+            <ion-col size="3" class="task-name">
+              {{ task.name }}
+            </ion-col>
+            <ion-col *ngFor="let day of weekDays" class="checkbox-col">
+              <ion-checkbox
+                [checked]="isAchieved(task, day.dateKey)"
+                (ionChange)="toggleAchievement(task.id, day.dateKey)">
+              </ion-checkbox>
+            </ion-col>
+          </ion-row>
+          
+          <!-- Empty state message -->
+          <ion-row *ngIf="tasks.length === 0" class="empty-state">
+            <ion-col>
+              <p>タスクを追加して、達成度を記録しましょう！</p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </ion-card-content>
     </ion-card>
 
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>今日の習慣</ion-card-title>
-      </ion-card-header>
+    <!-- Add Task Form -->
+    <ion-card class="add-task-card">
       <ion-card-content>
-        <p>今日もお疲れさまでした！</p>
-        <ion-button fill="clear" size="small">
-          <ion-icon name="checkmark" slot="start"></ion-icon>
-          習慣を記録する
+        <ion-item>
+          <ion-label position="stacked">新しいタスク</ion-label>
+          <ion-input
+            [(ngModel)]="newTaskName"
+            placeholder="達成したいタスクを入力してください"
+            (keyup.enter)="addTask()">
+          </ion-input>
+        </ion-item>
+        <ion-button expand="block" (click)="addTask()" [disabled]="!newTaskName.trim()">
+          <ion-icon name="add" slot="start"></ion-icon>
+          タスクを追加
         </ion-button>
       </ion-card-content>
     </ion-card>
 
-    <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-      <ion-fab-button>
-        <ion-icon name="add"></ion-icon>
-      </ion-fab-button>
-    </ion-fab>
+    <!-- Reward Input -->
+    <ion-card class="reward-card">
+      <ion-card-header>
+        <ion-card-title>ご褒美</ion-card-title>
+        <ion-card-subtitle>達成したらやること</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-input
+            [(ngModel)]="rewardText"
+            placeholder="ご褒美を入力してください"
+            (ionInput)="onRewardTextChange()">
+          </ion-input>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
   </div>
 </ion-content>

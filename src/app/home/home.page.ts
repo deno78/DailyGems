@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { 
   IonHeader, 
   IonToolbar, 
@@ -11,11 +13,22 @@ import {
   IonCardContent,
   IonButton,
   IonIcon,
-  IonFab,
-  IonFabButton
+  IonGrid,
+  IonRow,
+  IonCol,
+  IonCheckbox,
+  IonInput,
+  IonItem,
+  IonLabel
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { add, heart, checkmark } from 'ionicons/icons';
+
+interface Task {
+  id: string;
+  name: string;
+  achievements: { [dateKey: string]: boolean };
+}
 
 @Component({
   selector: 'app-home',
@@ -23,6 +36,8 @@ import { add, heart, checkmark } from 'ionicons/icons';
   styleUrls: ['home.page.scss'],
   standalone: true,
   imports: [
+    CommonModule,
+    FormsModule,
     IonHeader, 
     IonToolbar, 
     IonTitle, 
@@ -34,12 +49,102 @@ import { add, heart, checkmark } from 'ionicons/icons';
     IonCardContent,
     IonButton,
     IonIcon,
-    IonFab,
-    IonFabButton
+    IonGrid,
+    IonRow,
+    IonCol,
+    IonCheckbox,
+    IonInput,
+    IonItem,
+    IonLabel
   ],
 })
-export class HomePage {
+export class HomePage implements OnInit {
+  tasks: Task[] = [];
+  newTaskName: string = '';
+  rewardText: string = '';
+  weekDays: { date: Date; dateKey: string; dayName: string }[] = [];
+  
   constructor() {
     addIcons({ add, heart, checkmark });
+  }
+
+  ngOnInit() {
+    this.generateWeekDays();
+    this.loadDataFromStorage();
+  }
+
+  generateWeekDays() {
+    const today = new Date();
+    const currentDay = today.getDay(); // 0 = Sunday, 1 = Monday, etc.
+    const sunday = new Date(today);
+    sunday.setDate(today.getDate() - currentDay);
+
+    this.weekDays = [];
+    const dayNames = ['日', '月', '火', '水', '木', '金', '土'];
+    
+    for (let i = 0; i < 7; i++) {
+      const date = new Date(sunday);
+      date.setDate(sunday.getDate() + i);
+      
+      this.weekDays.push({
+        date: date,
+        dateKey: this.formatDateKey(date),
+        dayName: dayNames[i]
+      });
+    }
+  }
+
+  formatDateKey(date: Date): string {
+    return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+  }
+
+  addTask() {
+    if (this.newTaskName.trim()) {
+      const newTask: Task = {
+        id: Date.now().toString(),
+        name: this.newTaskName.trim(),
+        achievements: {}
+      };
+      this.tasks.push(newTask);
+      this.newTaskName = '';
+      this.saveDataToStorage();
+    }
+  }
+
+  toggleAchievement(taskId: string, dateKey: string) {
+    const task = this.tasks.find(t => t.id === taskId);
+    if (task) {
+      task.achievements[dateKey] = !task.achievements[dateKey];
+      this.saveDataToStorage();
+    }
+  }
+
+  isAchieved(task: Task, dateKey: string): boolean {
+    return task.achievements[dateKey] || false;
+  }
+
+  saveDataToStorage() {
+    const data = {
+      tasks: this.tasks,
+      rewardText: this.rewardText
+    };
+    localStorage.setItem('dailyGems_taskData', JSON.stringify(data));
+  }
+
+  loadDataFromStorage() {
+    const stored = localStorage.getItem('dailyGems_taskData');
+    if (stored) {
+      try {
+        const data = JSON.parse(stored);
+        this.tasks = data.tasks || [];
+        this.rewardText = data.rewardText || '';
+      } catch (error) {
+        console.error('Error loading data from storage:', error);
+      }
+    }
+  }
+
+  onRewardTextChange() {
+    this.saveDataToStorage();
   }
 }
