@@ -1,59 +1,54 @@
 # DailyGems
+日々習慣化アプリ - Progressive Web App (PWA)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.2.0.
+## 概要
+DailyGemsは、日々の習慣化をサポートするIonic Angular PWAアプリです。
+毎日の小さな習慣を積み重ねて、より良い自分を目指すためのアプリケーションです。
 
-## Development server
+## 技術スタック
+- **Ionic 8** with Angular 19
+- **Progressive Web App (PWA)** 対応
+- **Angular Service Worker** でオフライン対応
+- **TypeScript** & **SCSS**
+- **GitHub Pages** で自動デプロイ
 
-To start a local development server, run:
+## 開発
 
+### 必要な環境
+- Node.js 20以上
+- npm
+
+### セットアップ
 ```bash
-ng serve
+# 依存関係のインストール
+npm install
+
+# 開発サーバーの起動
+npm start
+
+# ブラウザで http://localhost:4200 にアクセス
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
+### ビルド
 ```bash
-ng generate component component-name
+# 本番用ビルド
+npm run build
+
+# GitHub Pages用ビルド
+npm run build -- --configuration=github-pages
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## デプロイ
+このアプリは GitHub Actions を使用して自動的に GitHub Pages にデプロイされます。
 
-```bash
-ng generate --help
-```
+- `main` ブランチにプッシュすると自動デプロイが実行されます
+- デプロイされたアプリは https://deno78.github.io/DailyGems/ でアクセス可能です
 
-## Building
+## PWA機能
+- オフラインでの動作
+- ホーム画面へのインストール
+- プッシュ通知対応（今後の機能）
+- バックグラウンド同期（今後の機能）
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## ライセンス
+MIT License

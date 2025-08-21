@@ -1,0 +1,47 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      DailyGems
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">DailyGems</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>ようこそ DailyGems へ</ion-card-title>
+        <ion-card-subtitle>日々の習慣化をサポートするアプリ</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        毎日の小さな習慣を積み重ねて、より良い自分を目指しましょう。
+        DailyGemsは、あなたの日々の成長をサポートします。
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>今日の習慣</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>今日もお疲れさまでした！</p>
+        <ion-button fill="clear" size="small">
+          <ion-icon name="checkmark" slot="start"></ion-icon>
+          習慣を記録する
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+      <ion-fab-button>
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </div>
+</ion-content>
