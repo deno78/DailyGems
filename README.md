@@ -42,7 +42,12 @@ npm run build -- --configuration=github-pages
 このアプリは GitHub Actions を使用して自動的に GitHub Pages にデプロイされます。
 
 - `main` ブランチにプッシュすると自動デプロイが実行されます
+- プルリクエストでは Build テストのみが実行されます
 - デプロイされたアプリは https://deno78.github.io/DailyGems/ でアクセス可能です
+
+### GitHub Actions ワークフロー
+- `deploy.yml`: main ブランチへの push 時に GitHub Pages へのデプロイを実行
+- `test.yml`: プルリクエスト時にビルドテストを実行
 
 ## PWA機能
 - オフラインでの動作
