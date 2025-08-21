@@ -26,3 +26,112 @@ ion-card {
 ion-card-content {
   padding-top: 0;
 }
+
+/* Achievement Grid Styles */
+.achievement-card {
+  margin: 16px 8px;
+}
+
+.achievement-grid {
+  overflow-x: auto;
+  min-width: 100%;
+}
+
+.header-row {
+  background-color: var(--ion-color-light);
+  border-radius: 8px;
+  margin-bottom: 8px;
+  padding: 8px 0;
+}
+
+.task-column-header {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+}
+
+.day-header {
+  text-align: center;
+  font-weight: bold;
+  padding: 4px;
+}
+
+.day-name {
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+
+.day-date {
+  font-size: 18px;
+  color: var(--ion-color-primary);
+}
+
+.task-row {
+  border-bottom: 1px solid var(--ion-color-light);
+  padding: 8px 0;
+  align-items: center;
+}
+
+.task-name {
+  text-align: left;
+  padding: 8px;
+  font-size: 14px;
+  word-break: break-word;
+  display: flex;
+  align-items: center;
+  min-height: 40px;
+}
+
+.checkbox-col {
+  text-align: center;
+  padding: 4px;
+}
+
+.checkbox-col ion-checkbox {
+  margin: 0 auto;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 20px;
+}
+
+.empty-state p {
+  color: var(--ion-color-medium);
+  font-style: italic;
+}
+
+/* Add Task Form Styles */
+.add-task-card ion-button {
+  margin-top: 16px;
+}
+
+/* Reward Card Styles */
+.reward-card {
+  margin-bottom: 60px; /* Space for any bottom navigation */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .achievement-grid {
+    font-size: 12px;
+  }
+  
+  .task-name {
+    font-size: 12px;
+  }
+  
+  .day-header {
+    padding: 2px;
+  }
+  
+  .day-name {
+    font-size: 12px;
+  }
+  
+  .day-date {
+    font-size: 16px;
+  }
+}
