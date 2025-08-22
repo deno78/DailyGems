@@ -113,6 +113,44 @@ ion-card-content {
   margin-bottom: 16px;
 }
 
+/* Usage Instructions Card Styles */
+.usage-card {
+  margin-bottom: 16px;
+}
+
+.usage-instructions {
+  text-align: left;
+  padding: 8px;
+}
+
+.usage-instructions h5 {
+  color: var(--ion-color-primary);
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0 0 12px 0;
+  text-align: center;
+}
+
+.usage-instructions ol {
+  margin: 16px 0;
+  padding-left: 20px;
+}
+
+.usage-instructions li {
+  margin-bottom: 8px;
+  line-height: 1.5;
+  color: var(--ion-color-dark);
+}
+
+.usage-motto {
+  text-align: center;
+  font-style: italic;
+  color: var(--ion-color-medium);
+  margin: 16px 0 0 0;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
 /* QR Codes Card Styles */
 .qr-codes-card {
   margin-bottom: 60px; /* Space for any bottom navigation */
@@ -208,5 +246,17 @@ ion-card-content {
   
   .qr-code-container {
     min-height: 120px;
+  }
+  
+  .usage-instructions h5 {
+    font-size: 14px;
+  }
+  
+  .usage-instructions li {
+    font-size: 14px;
+  }
+  
+  .usage-motto {
+    font-size: 12px;
   }
 }
