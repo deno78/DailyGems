@@ -65,22 +65,28 @@
     </ion-card>
 
     <!-- Add Task Form -->
-    <ion-card class="add-task-card">
-      <ion-card-content>
-        <ion-item>
-          <ion-label position="stacked">新しいタスク</ion-label>
-          <ion-input
-            [(ngModel)]="newTaskName"
-            placeholder="達成したいタスクを入力してください"
-            (keyup.enter)="addTask()">
-          </ion-input>
-        </ion-item>
-        <ion-button expand="block" (click)="addTask()" [disabled]="!newTaskName.trim()">
+    <ion-accordion-group>
+      <ion-accordion value="add-task">
+        <ion-item slot="header" color="light">
           <ion-icon name="add" slot="start"></ion-icon>
-          タスクを追加
-        </ion-button>
-      </ion-card-content>
-    </ion-card>
+          <ion-label>新しいタスクを追加</ion-label>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          <ion-item>
+            <ion-label position="stacked">新しいタスク</ion-label>
+            <ion-input
+              [(ngModel)]="newTaskName"
+              placeholder="達成したいタスクを入力してください"
+              (keyup.enter)="addTask()">
+            </ion-input>
+          </ion-item>
+          <ion-button expand="block" (click)="addTask()" [disabled]="!newTaskName.trim()">
+            <ion-icon name="add" slot="start"></ion-icon>
+            タスクを追加
+          </ion-button>
+        </div>
+      </ion-accordion>
+    </ion-accordion-group>
 
     <!-- Reward Input -->
     <ion-card class="reward-card">
