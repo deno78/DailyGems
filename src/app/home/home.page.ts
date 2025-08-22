@@ -22,7 +22,7 @@ import {
   IonLabel
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { add, heart, checkmark, shareSocial } from 'ionicons/icons';
+import { add, heart, checkmark, shareSocial, informationCircle } from 'ionicons/icons';
 import * as QRCode from 'qrcode';
 
 interface Task {
@@ -67,7 +67,7 @@ export class HomePage implements OnInit {
   shareQRCode: string = '';
   
   constructor() {
-    addIcons({ add, heart, checkmark, shareSocial });
+    addIcons({ add, heart, checkmark, shareSocial, informationCircle });
   }
 
   ngOnInit() {
