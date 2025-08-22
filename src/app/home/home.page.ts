@@ -22,7 +22,8 @@ import {
   IonLabel
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { add, heart, checkmark } from 'ionicons/icons';
+import { add, heart, checkmark, helpCircle, shareSocial } from 'ionicons/icons';
+import * as QRCode from 'qrcode';
 
 interface Task {
   id: string;
@@ -63,14 +64,17 @@ export class HomePage implements OnInit {
   newTaskName: string = '';
   rewardText: string = '';
   weekDays: { date: Date; dateKey: string; dayName: string }[] = [];
+  helpQRCode: string = '';
+  shareQRCode: string = '';
   
   constructor() {
-    addIcons({ add, heart, checkmark });
+    addIcons({ add, heart, checkmark, helpCircle, shareSocial });
   }
 
   ngOnInit() {
     this.generateWeekDays();
     this.loadDataFromStorage();
+    this.generateQRCodes();
   }
 
   generateWeekDays() {
@@ -146,5 +150,43 @@ export class HomePage implements OnInit {
 
   onRewardTextChange() {
     this.saveDataToStorage();
+  }
+
+  async generateQRCodes() {
+    try {
+      // Help/Usage instructions text
+      const helpText = `DailyGems - 日々習慣化アプリの使い方
+
+1. 新しいタスクを追加
+2. 毎日のタスク達成をチェック
+3. 週の進捗を確認
+4. ご褒美を設定してモチベーション維持
+
+継続は力なり！毎日コツコツと習慣を積み重ねましょう。`;
+
+      // GitHub Pages URL for sharing
+      const shareUrl = 'https://deno78.github.io/DailyGems/';
+
+      // Generate QR codes
+      this.helpQRCode = await QRCode.toDataURL(helpText, {
+        width: 150,
+        margin: 2,
+        color: {
+          dark: '#000000',
+          light: '#FFFFFF'
+        }
+      });
+
+      this.shareQRCode = await QRCode.toDataURL(shareUrl, {
+        width: 150,
+        margin: 2,
+        color: {
+          dark: '#000000',
+          light: '#FFFFFF'
+        }
+      });
+    } catch (error) {
+      console.error('Error generating QR codes:', error);
+    }
   }
 }
