@@ -20,6 +20,7 @@ import {
   IonInput,
   IonItem,
   IonLabel,
+  AlertController,
   IonAccordion,
   IonAccordionGroup
 } from '@ionic/angular/standalone';
@@ -70,8 +71,8 @@ export class HomePage implements OnInit {
   weekDays: { date: Date; dateKey: string; dayName: string }[] = [];
   shareQRCode: string = '';
   
-  constructor() {
-    addIcons({ add, heart, checkmark, shareSocial, informationCircle, chevronDown });
+  constructor(private alertController: AlertController) {
+    addIcons({ add, heart, checkmark, shareSocial, informationCircle, trash, chevronDown });
   }
 
   ngOnInit() {
@@ -116,6 +117,29 @@ export class HomePage implements OnInit {
       this.newTaskName = '';
       this.saveDataToStorage();
     }
+  }
+
+  async deleteTask(taskId: string, taskName: string) {
+    const alert = await this.alertController.create({
+      header: 'タスクの削除',
+      message: `「${taskName}」を削除しますか？\nこの操作は取り消せません。`,
+      buttons: [
+        {
+          text: 'キャンセル',
+          role: 'cancel'
+        },
+        {
+          text: '削除',
+          role: 'destructive',
+          handler: () => {
+            this.tasks = this.tasks.filter(task => task.id !== taskId);
+            this.saveDataToStorage();
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
   toggleAchievement(taskId: string, dateKey: string) {

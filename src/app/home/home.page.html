@@ -35,7 +35,16 @@
           <!-- Task rows -->
           <ion-row *ngFor="let task of tasks" class="task-row">
             <ion-col size="3" class="task-name">
-              {{ task.name }}
+              <div class="task-content">
+                <span class="task-text">{{ task.name }}</span>
+                <ion-button 
+                  fill="clear" 
+                  size="small" 
+                  class="delete-button"
+                  (click)="deleteTask(task.id, task.name)">
+                  <ion-icon name="trash" slot="icon-only"></ion-icon>
+                </ion-button>
+              </div>
             </ion-col>
             <ion-col *ngFor="let day of weekDays" class="checkbox-col">
               <ion-checkbox
