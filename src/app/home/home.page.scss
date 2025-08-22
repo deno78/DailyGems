@@ -113,6 +113,22 @@ ion-card-content {
   margin-bottom: 16px;
 }
 
+/* Usage Instructions Card Styles */
+.usage-instructions-card {
+  margin-bottom: 16px;
+}
+
+.usage-text {
+  padding: 8px 0;
+}
+
+.usage-text p {
+  margin: 8px 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ion-color-dark);
+}
+
 /* QR Codes Card Styles */
 .qr-codes-card {
   margin-bottom: 60px; /* Space for any bottom navigation */
