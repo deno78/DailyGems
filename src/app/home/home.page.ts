@@ -19,10 +19,12 @@ import {
   IonCheckbox,
   IonInput,
   IonItem,
-  IonLabel
+  IonLabel,
+  IonAccordion,
+  IonAccordionGroup
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { add, heart, checkmark, shareSocial, informationCircle } from 'ionicons/icons';
+import { add, heart, checkmark, shareSocial, informationCircle, chevronDown } from 'ionicons/icons';
 import * as QRCode from 'qrcode';
 
 interface Task {
@@ -56,7 +58,9 @@ interface Task {
     IonCheckbox,
     IonInput,
     IonItem,
-    IonLabel
+    IonLabel,
+    IonAccordion,
+    IonAccordionGroup
   ],
 })
 export class HomePage implements OnInit {
@@ -67,7 +71,7 @@ export class HomePage implements OnInit {
   shareQRCode: string = '';
   
   constructor() {
-    addIcons({ add, heart, checkmark, shareSocial, informationCircle });
+    addIcons({ add, heart, checkmark, shareSocial, informationCircle, chevronDown });
   }
 
   ngOnInit() {
