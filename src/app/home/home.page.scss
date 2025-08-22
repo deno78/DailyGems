@@ -126,9 +126,11 @@ ion-card-content {
   padding: 8px;
 }
 
-.qr-section {
+.qr-codes-card .qr-section {
   text-align: center;
-  padding: 8px;
+  padding: 16px;
+  max-width: 300px;
+  margin: 0 auto;
 }
 
 .qr-section h4 {
