@@ -110,7 +110,70 @@ ion-card-content {
 
 /* Reward Card Styles */
 .reward-card {
+  margin-bottom: 16px;
+}
+
+/* QR Codes Card Styles */
+.qr-codes-card {
   margin-bottom: 60px; /* Space for any bottom navigation */
+}
+
+.qr-grid {
+  padding: 0;
+}
+
+.qr-col {
+  padding: 8px;
+}
+
+.qr-section {
+  text-align: center;
+  padding: 8px;
+}
+
+.qr-section h4 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--ion-color-primary);
+  margin: 0 0 12px 0;
+}
+
+.qr-section h4 ion-icon {
+  font-size: 18px;
+}
+
+.qr-code-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 150px;
+  padding: 8px;
+  background-color: var(--ion-color-light);
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.qr-code-container img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.qr-loading {
+  color: var(--ion-color-medium);
+  font-style: italic;
+}
+
+.qr-description {
+  font-size: 12px;
+  color: var(--ion-color-medium);
+  margin: 0;
+  line-height: 1.4;
+  text-align: center;
 }
 
 /* Responsive adjustments */
@@ -133,5 +196,17 @@ ion-card-content {
   
   .day-date {
     font-size: 16px;
+  }
+  
+  .qr-section h4 {
+    font-size: 14px;
+  }
+  
+  .qr-description {
+    font-size: 11px;
+  }
+  
+  .qr-code-container {
+    min-height: 120px;
   }
 }

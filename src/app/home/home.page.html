@@ -89,5 +89,48 @@
         </ion-item>
       </ion-card-content>
     </ion-card>
+
+    <!-- QR Codes Section -->
+    <ion-card class="qr-codes-card">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="help-circle" slot="start"></ion-icon>
+          ヘルプ＆紹介
+        </ion-card-title>
+        <ion-card-subtitle>QRコードをスキャンしてください</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-grid class="qr-grid">
+          <ion-row>
+            <ion-col size="6" class="qr-col">
+              <div class="qr-section">
+                <h4>
+                  <ion-icon name="help-circle"></ion-icon>
+                  使い方
+                </h4>
+                <div class="qr-code-container">
+                  <img [src]="helpQRCode" alt="アプリの使い方QRコード" *ngIf="helpQRCode" />
+                  <div class="qr-loading" *ngIf="!helpQRCode">読み込み中...</div>
+                </div>
+                <p class="qr-description">QRコードをスキャンしてアプリの使い方を確認</p>
+              </div>
+            </ion-col>
+            <ion-col size="6" class="qr-col">
+              <div class="qr-section">
+                <h4>
+                  <ion-icon name="share-social"></ion-icon>
+                  紹介
+                </h4>
+                <div class="qr-code-container">
+                  <img [src]="shareQRCode" alt="アプリ紹介QRコード" *ngIf="shareQRCode" />
+                  <div class="qr-loading" *ngIf="!shareQRCode">読み込み中...</div>
+                </div>
+                <p class="qr-description">QRコードをスキャンして他の人にアプリを紹介</p>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
   </div>
 </ion-content>
