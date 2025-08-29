@@ -14,3 +14,6 @@ ext {
     androidxEspressoCoreVersion = '3.6.1'
     cordovaAndroidVersion = '10.1.1'
 }
+
+// AdMob configuration - these will be set from environment variables or gradle.properties
+project.ext.ADMOB_APP_ID = project.hasProperty('ADMOB_APP_ID') ? ADMOB_APP_ID : 'ca-app-pub-3940256099942544~3347511713'

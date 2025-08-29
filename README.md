@@ -95,6 +95,57 @@ cd android
 ./gradlew bundleRelease  # リリース AAB
 ```
 
+## Google AdMob 広告対応
+
+このアプリは Google AdMob 広告に対応しており、Android アプリでバナー広告を表示できます。
+
+### AdMob 設定に必要な環境変数
+
+以下の環境変数をリポジトリの Secrets または環境設定で設定してください：
+
+| 変数名 | 説明 | 例 |
+|--------|------|-----|
+| `ADMOB_APP_ID` | AdMob アプリケーション ID | `ca-app-pub-XXXXXXXXXXXXXXXX~XXXXXXXXXX` |
+| `ADMOB_BANNER_ID` | バナー広告ユニット ID | `ca-app-pub-XXXXXXXXXXXXXXXX/XXXXXXXXXX` |
+| `ADMOB_INTERSTITIAL_ID` | インターステーシャル広告ユニット ID | `ca-app-pub-XXXXXXXXXXXXXXXX/XXXXXXXXXX` |
+| `ADMOB_REWARDED_ID` | リワード広告ユニット ID | `ca-app-pub-XXXXXXXXXXXXXXXX/XXXXXXXXXX` |
+
+### AdMob セットアップ手順
+
+1. **Google AdMob アカウント作成**
+   - [Google AdMob](https://admob.google.com/) でアカウントを作成
+   - 新しいアプリを登録し、アプリケーション ID を取得
+
+2. **広告ユニット作成**
+   - バナー、インターステーシャル、リワード広告ユニットを作成
+   - 各広告ユニット ID を記録
+
+3. **環境変数設定**
+   - GitHub リポジトリの Settings > Secrets and variables > Actions で環境変数を設定
+   - または、android/gradle.properties に以下の形式で設定：
+   ```properties
+   ADMOB_APP_ID=ca-app-pub-XXXXXXXXXXXXXXXX~XXXXXXXXXX
+   ADMOB_BANNER_ID=ca-app-pub-XXXXXXXXXXXXXXXX/XXXXXXXXXX
+   ADMOB_INTERSTITIAL_ID=ca-app-pub-XXXXXXXXXXXXXXXX/XXXXXXXXXX
+   ADMOB_REWARDED_ID=ca-app-pub-XXXXXXXXXXXXXXXX/XXXXXXXXXX
+   ```
+
+4. **本番ビルド**
+   - 本番環境では `src/environments/environment.prod.ts` の `testMode` を `false` に設定
+   - リリースビルド時に実際の AdMob ID が使用されます
+
+### テスト環境での動作確認
+
+- 開発環境では自動的にテスト広告が表示されます
+- テスト広告 ID が environment.ts で設定済みです
+- 実際の広告表示前にテスト環境で動作確認を行ってください
+
+### 注意事項
+
+- 本番環境では必ず実際の AdMob ID を使用してください
+- テスト広告 ID を本番で使用すると AdMob アカウントが停止される可能性があります
+- 広告の表示は Android アプリでのみ動作します（PWA では動作しません）
+
 ## PWA機能
 - オフラインでの動作
 - ホーム画面へのインストール
