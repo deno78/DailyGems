@@ -11,6 +11,7 @@ DailyGemsは、日々の習慣化をサポートするIonic Angular PWAアプリ
 - **Angular Service Worker** でオフライン対応
 - **TypeScript** & **SCSS**
 - **GitHub Pages** で自動デプロイ
+- **Capacitor** でネイティブAndroidアプリ対応
 
 ## 開発
 
@@ -36,6 +37,18 @@ npm run build
 
 # GitHub Pages用ビルド
 npm run build -- --configuration=github-pages
+
+# Android用ビルド（Web→Capacitor sync）
+npm run cap:build:android
+```
+
+### Android開発
+```bash
+# Capacitorプラットフォーム同期
+npm run cap:sync:android
+
+# Android Studioでプロジェクトを開く
+npm run cap:open:android
 ```
 
 ## デプロイ
@@ -48,6 +61,39 @@ npm run build -- --configuration=github-pages
 ### GitHub Actions ワークフロー
 - `deploy.yml`: main ブランチへの push 時に GitHub Pages へのデプロイを実行
 - `test.yml`: プルリクエスト時にビルドテストを実行
+- `android-build.yml`: Android APK/AAB ファイルのビルドを実行
+
+## Android アプリ
+このプロジェクトは Capacitor を使用してネイティブ Android アプリとしてもビルドできます。
+
+### Android ビルド
+GitHub Actions を使用して自動的に Android APK/AAB ファイルをビルドできます：
+
+1. **手動トリガー**: GitHub Actions の「Build Android APK/AAB」ワークフローを手動実行
+   - ビルドタイプ: `debug` または `release`
+   - 出力形式: `apk` または `aab`
+
+2. **自動トリガー**: 以下のファイルが変更された場合に自動実行
+   - `src/**`（ソースコード）
+   - `android/**`（Androidプロジェクト）
+   - `package.json`、`angular.json`、`capacitor.config.ts`
+
+### ローカル Android 開発
+```bash
+# 必要な環境: Android Studio, Android SDK, Java 17+
+
+# Web アプリをビルドして Android プロジェクトに同期
+npm run cap:build:android
+
+# Android Studio でプロジェクトを開く
+npm run cap:open:android
+
+# または直接 Gradle でビルド
+cd android
+./gradlew assembleDebug  # デバッグ APK
+./gradlew assembleRelease  # リリース APK
+./gradlew bundleRelease  # リリース AAB
+```
 
 ## PWA機能
 - オフラインでの動作

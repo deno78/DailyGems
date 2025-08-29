@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">DailyGems</string>
+    <string name="title_activity_main">DailyGems</string>
+    <string name="package_name">com.example.dailygems</string>
+    <string name="custom_url_scheme">com.example.dailygems</string>
+</resources>
