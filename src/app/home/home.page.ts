@@ -27,6 +27,7 @@ import {
 import { addIcons } from 'ionicons';
 import { add, heart, checkmark, shareSocial, informationCircle, chevronDown, trash } from 'ionicons/icons';
 import * as QRCode from 'qrcode';
+import { AdmobService } from '../services/admob.service';
 
 interface Task {
   id: string;
@@ -71,7 +72,7 @@ export class HomePage implements OnInit {
   weekDays: { date: Date; dateKey: string; dayName: string }[] = [];
   shareQRCode: string = '';
   
-  constructor(private alertController: AlertController) {
+  constructor(private alertController: AlertController, private admobService: AdmobService) {
     addIcons({ add, heart, checkmark, shareSocial, informationCircle, trash, chevronDown });
   }
 
@@ -79,6 +80,16 @@ export class HomePage implements OnInit {
     this.generateWeekDays();
     this.loadDataFromStorage();
     this.generateQRCodes();
+    this.initializeAdMob();
+  }
+
+  async initializeAdMob() {
+    try {
+      await this.admobService.initialize();
+      await this.admobService.showBannerAd();
+    } catch (error) {
+      console.error('Error initializing AdMob:', error);
+    }
   }
 
   generateWeekDays() {
