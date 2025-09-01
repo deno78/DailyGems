@@ -81,25 +81,25 @@ jobs:
       if: ${{ env.BUILD_TYPE == 'debug' && env.OUTPUT_FORMAT == 'apk' }}
       run: |
         cd android
-        ./gradlew assembleDebug
+        ./gradlew assembleDebug --stacktrace --info
         
     - name: Build Android APK (Release)
       if: ${{ env.BUILD_TYPE == 'release' && env.OUTPUT_FORMAT == 'apk' }}
       run: |
         cd android
-        ./gradlew assembleRelease
+        ./gradlew assembleRelease --stacktrace --info
         
     - name: Build Android AAB (Debug)
       if: ${{ env.BUILD_TYPE == 'debug' && env.OUTPUT_FORMAT == 'aab' }}
       run: |
         cd android
-        ./gradlew bundleDebug
+        ./gradlew bundleDebug --stacktrace --info
         
     - name: Build Android AAB (Release)
       if: ${{ env.BUILD_TYPE == 'release' && env.OUTPUT_FORMAT == 'aab' }}
       run: |
         cd android
-        ./gradlew bundleRelease
+        ./gradlew bundleRelease --stacktrace --info
         
     - name: Find APK files
       if: ${{ env.OUTPUT_FORMAT == 'apk' }}
