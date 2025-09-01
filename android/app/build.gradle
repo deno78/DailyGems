@@ -60,11 +60,16 @@ android {
     }
 }
 
-try {
-    def servicesJSON = file('google-services.json')
-    if (servicesJSON.text) {
-        apply plugin: 'com.google.gms.google-services'
-    }
-} catch(Exception e) {
-    logger.info("google-services.json not found, google-services plugin not applied. Push Notifications won't work")
+// Apply Google Services plugin only if google-services.json exists
+// This prevents build failures when Firebase configuration is not set up
+def googleServicesFile = file('google-services.json')
+if (googleServicesFile.exists()) {
+    apply plugin: 'com.google.gms.google-services'
+    logger.info("google-services.json found, applying Google Services plugin for Firebase/Push Notifications")
+} else {
+    logger.warn("google-services.json not found. Firebase/Push Notifications will not work.")
+    logger.warn("To enable Firebase features:")
+    logger.warn("1. Download google-services.json from Firebase Console")
+    logger.warn("2. Place it in android/app/ directory")
+    logger.warn("3. See google-services.json.example for template structure")
 }
