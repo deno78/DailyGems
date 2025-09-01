@@ -26,8 +26,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 }
 
@@ -53,13 +53,13 @@ dependencies {
 
 apply from: 'capacitor.build.gradle'
 
-// Override Capacitor's Java version settings to ensure Java 17 compatibility
+// Override Capacitor's Java version settings to ensure Java 11 compatibility
 // The capacitor.build.gradle file is auto-generated and may contain JavaVersion.VERSION_21
-// which causes "invalid source release: 21" build errors. This override ensures Java 17 is used.
+// which causes "invalid source release: 21" build errors. This override ensures Java 11 is used.
 android {
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 }
 

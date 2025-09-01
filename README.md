@@ -80,7 +80,7 @@ GitHub Actions を使用して自動的に Android APK/AAB ファイルをビル
 
 ### ローカル Android 開発
 ```bash
-# 必要な環境: Android Studio, Android SDK, Java 17+
+# 必要な環境: Android Studio, Android SDK, Java 11+
 
 # Web アプリをビルドして Android プロジェクトに同期
 npm run cap:build:android
