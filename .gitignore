@@ -47,3 +47,6 @@ android/app/capacitor-cordova-android-plugins/
 android/app/.cxx/
 android/app/src/main/assets/public/
 android/build/
+
+# Firebase/Google Services
+android/app/google-services.json
