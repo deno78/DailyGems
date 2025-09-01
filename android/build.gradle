@@ -41,10 +41,16 @@ subprojects {
 
 // Configure Kotlin JVM target to ensure compatibility with Java 17
 // This prevents "Inconsistent JVM-target compatibility" errors between Java and Kotlin
+// Only apply to projects that have the Kotlin plugin applied
 subprojects {
-    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
-        kotlinOptions {
-            jvmTarget = "17"
+    afterEvaluate { project ->
+        // Check if the project has Kotlin plugin applied before configuring Kotlin options
+        if (project.plugins.hasPlugin('kotlin-android') || project.plugins.hasPlugin('org.jetbrains.kotlin.android')) {
+            project.tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+                kotlinOptions {
+                    jvmTarget = "17"
+                }
+            }
         }
     }
 }
