@@ -7,6 +7,33 @@ This guide explains how to set up Firebase for push notifications and other Goog
 - Access to [Firebase Console](https://console.firebase.google.com/)
 - Android project already built with Capacitor
 
+## 日本語での回答 (Answer in Japanese)
+
+**質問**: Google-Service.jsonに記載する情報で、Variableに持つべきものがあれば提示して。Firebase側の設定方法も併せて調べて
+
+**回答**: 
+google-services.json ファイルの中で環境変数として管理すべき情報は以下の通りです：
+
+### 環境変数として管理可能な情報
+
+| フィールド | 環境変数名 | 用途 | 機密度 |
+|-----------|------------|------|--------|
+| `project_info.project_number` | `FIREBASE_PROJECT_NUMBER` | Firebase プロジェクト番号 | 中 |
+| `project_info.project_id` | `FIREBASE_PROJECT_ID` | Firebase プロジェクト ID | 低 |
+| `client_info.mobilesdk_app_id` | `FIREBASE_APP_ID` | Firebase アプリ ID | 中 |
+| `oauth_client.client_id` | `FIREBASE_CLIENT_ID` | OAuth クライアント ID | 高 |
+| `api_key.current_key` | `FIREBASE_API_KEY` | Firebase API キー | 高 |
+
+### 推奨方法
+ファイル全体を `GOOGLE_SERVICES_JSON` シークレットとして保存することを推奨します。これにより、設定が簡単で安全性も高くなります。
+
+### Firebase 側の設定手順
+1. [Firebase Console](https://console.firebase.google.com/) にアクセス
+2. プロジェクトを作成またはナビゲート
+3. Android アプリを追加（パッケージ名: `com.example.dailygems`）
+4. `google-services.json` ファイルをダウンロード
+5. GitHub リポジトリの Settings > Secrets で `GOOGLE_SERVICES_JSON` シークレットとしてファイル内容を保存
+
 ## Setup Steps
 
 ### 1. Create Firebase Project
@@ -112,11 +139,71 @@ For automated builds, store the `google-services.json` content as a GitHub Secre
 
 1. Go to Repository Settings > Secrets and variables > Actions
 2. Add secret named `GOOGLE_SERVICES_JSON` with file content
-3. In workflow, create file before build:
+3. The workflow automatically creates the file before build if the secret exists
 
-```yaml
-- name: Create google-services.json
-  run: echo '${{ secrets.GOOGLE_SERVICES_JSON }}' > android/app/google-services.json
+> **Note**: The GitHub Actions workflow in `.github/workflows/android-build.yml` has been updated to automatically create `google-services.json` from the `GOOGLE_SERVICES_JSON` secret if it exists. No additional workflow configuration is needed.
+
+### Environment Variables for google-services.json
+
+While storing the entire file as a secret is recommended, individual fields that could be stored as environment variables include:
+
+| Field | Environment Variable | Purpose | Sensitivity |
+|-------|---------------------|---------|-------------|
+| `project_info.project_number` | `FIREBASE_PROJECT_NUMBER` | Firebase project identifier | Medium |
+| `project_info.project_id` | `FIREBASE_PROJECT_ID` | Firebase project ID | Low |
+| `client_info.mobilesdk_app_id` | `FIREBASE_APP_ID` | Firebase app identifier | Medium |
+| `oauth_client.client_id` | `FIREBASE_CLIENT_ID` | OAuth client ID | High |
+| `api_key.current_key` | `FIREBASE_API_KEY` | Firebase API key | High |
+
+**Recommendation**: Use the complete file approach (`GOOGLE_SERVICES_JSON` secret) for simplicity and security.
+
+### Alternative: Individual Environment Variables
+
+If you prefer to store individual values as environment variables, you would need to create a script to generate the `google-services.json` file from these variables. However, this approach is more complex and error-prone.
+
+```bash
+# Example script to generate google-services.json from environment variables
+cat > android/app/google-services.json << EOF
+{
+  "project_info": {
+    "project_number": "${FIREBASE_PROJECT_NUMBER}",
+    "project_id": "${FIREBASE_PROJECT_ID}",
+    "storage_bucket": "${FIREBASE_PROJECT_ID}.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "${FIREBASE_APP_ID}",
+        "android_client_info": {
+          "package_name": "com.example.dailygems"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "${FIREBASE_CLIENT_ID}",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "${FIREBASE_API_KEY}"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "${FIREBASE_CLIENT_ID}",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
+EOF
 ```
 
 ## Related Files
