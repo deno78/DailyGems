@@ -15,3 +15,54 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+
+/* Light Purple Theme */
+:root {
+  /* Primary color - light purple */
+  --ion-color-primary: #b19cd9;
+  --ion-color-primary-rgb: 177, 156, 217;
+  --ion-color-primary-contrast: #2d2d2d;
+  --ion-color-primary-contrast-rgb: 45, 45, 45;
+  --ion-color-primary-shade: #9c89bf;
+  --ion-color-primary-tint: #b9a6dd;
+
+  /* Secondary color - deeper purple */
+  --ion-color-secondary: #9b7fb8;
+  --ion-color-secondary-rgb: 155, 127, 184;
+  --ion-color-secondary-contrast: #ffffff;
+  --ion-color-secondary-contrast-rgb: 255, 255, 255;
+  --ion-color-secondary-shade: #8970a2;
+  --ion-color-secondary-tint: #a58cbf;
+
+  /* Tertiary color - lavender */
+  --ion-color-tertiary: #d4c5f2;
+  --ion-color-tertiary-rgb: 212, 197, 242;
+  --ion-color-tertiary-contrast: #2d2d2d;
+  --ion-color-tertiary-contrast-rgb: 45, 45, 45;
+  --ion-color-tertiary-shade: #baadd5;
+  --ion-color-tertiary-tint: #d8cbf3;
+
+  /* Light color - very light purple/lavender */
+  --ion-color-light: #f5f2fa;
+  --ion-color-light-rgb: 245, 242, 250;
+  --ion-color-light-contrast: #2d2d2d;
+  --ion-color-light-contrast-rgb: 45, 45, 45;
+  --ion-color-light-shade: #d8d5dc;
+  --ion-color-light-tint: #f6f3fb;
+
+  /* Medium color - muted purple */
+  --ion-color-medium: #8a7ca8;
+  --ion-color-medium-rgb: 138, 124, 168;
+  --ion-color-medium-contrast: #ffffff;
+  --ion-color-medium-contrast-rgb: 255, 255, 255;
+  --ion-color-medium-shade: #796d94;
+  --ion-color-medium-tint: #9689b1;
+
+  /* Background color - very light purple */
+  --ion-background-color: #faf9fc;
+  --ion-background-color-rgb: 250, 249, 252;
+
+  /* Text color */
+  --ion-text-color: #2d2d2d;
+  --ion-text-color-rgb: 45, 45, 45;
+}
